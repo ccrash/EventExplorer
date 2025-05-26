@@ -10,4 +10,7 @@ module.exports = {
       tsconfig: 'tsconfig.json',
     },
   },
+  moduleNameMapper: {
+    '^@expo/vector-icons/Ionicons$': '<rootDir>/__mocks__/IoniconsMock.js'
+  }
 }

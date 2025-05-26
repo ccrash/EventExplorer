@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView, View, StyleSheet, ViewStyle, RefreshControl } from 'react-native'
+import { ScrollView, View, StyleSheet, ViewStyle } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useThemeStore } from '../store/useThemeStore'
 
@@ -8,12 +8,10 @@ type Props = {
   style?: ViewStyle
   scroll?: boolean
   centered?: boolean
-  refreshing?: boolean
-  onRefresh?: () => void
   disablePadding?: boolean
 }
 
-export const Screen = ({ children, style, scroll = false, centered = false, refreshing = false, onRefresh, disablePadding = false }: Props) => {
+export const Screen = ({children, style, scroll = false, centered = false,  disablePadding = false}: Props) => {
   const { theme } = useThemeStore()
   const Container = scroll ? ScrollView : View
 
@@ -25,21 +23,11 @@ export const Screen = ({ children, style, scroll = false, centered = false, refr
   ]
 
   return (
-    <SafeAreaView 
+    <SafeAreaView
       edges={['bottom', 'left', 'right']}
-      style={[styles.safeArea, { backgroundColor: theme.background }]}>
-      <Container
-        style={layoutStyles}
-        refreshControl={
-          scroll && onRefresh ? (
-            <RefreshControl
-              refreshing={refreshing}
-              onRefresh={onRefresh}
-              tintColor={theme.text}
-            />
-          ) : undefined
-        }
-      >
+      style={[styles.safeArea, { backgroundColor: theme.background }]}
+    >
+      <Container style={layoutStyles}>
         {children}
       </Container>
     </SafeAreaView>

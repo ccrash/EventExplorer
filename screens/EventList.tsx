@@ -1,5 +1,5 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react'
-import { Text, Switch, View, FlatList, Button, RefreshControl, ActivityIndicator, TouchableOpacity } from 'react-native'
+import React, { useEffect, useMemo, useState } from 'react'
+import { Text, FlatList, RefreshControl, ActivityIndicator } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../types/navigation'
@@ -8,82 +8,58 @@ import { SearchInput } from '../components/SearchInput'
 import { filterEvents } from '../utils/filterEvents'
 import { useEventStore } from '../store/useEventStore'
 import { useThemeStore } from '../store/useThemeStore'
-import { useEventActions } from '../hooks/useEventActions'
+import { useEventLoader } from '../hooks/useEventActions'
+import { useHomeHeader } from '../hooks/useHomeHeader'
 import { Screen } from '../components/Screen'
-import Ionicons from '@expo/vector-icons/Ionicons'
+
+type Navigation = NativeStackNavigationProp<RootStackParamList>
 
 export default function EventListScreen() {
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
-  const { theme, isDark, toggleTheme } = useThemeStore()
+  const navigation = useNavigation<Navigation>()
+  const { theme } = useThemeStore()
   const { events, isRefreshing } = useEventStore()
-  const { refreshEvents } = useEventActions()
+  const { loadEvents } = useEventLoader()
   const [query, setQuery] = useState('')
 
+  useHomeHeader() // handles navigation header setup + theme toggling
+
   useEffect(() => {
-    if (events.length === 0) refreshEvents()
-  }, [])
+    if (events.length === 0) loadEvents()
+  }, [events.length, loadEvents])
 
-  useLayoutEffect(() => {
-    const headerLeft = () => (
-      <View style={{ paddingLeft: 16 }}>
-        <Switch
-          value={isDark}
-          onValueChange={toggleTheme}
-          thumbColor={theme.text}
-          trackColor={{ false: '#ccc', true: '#666' }}
-        />
-      </View>
-    )
-
-    const headerRight = () => {
-      return (
-        <TouchableOpacity onPress={() => navigation.navigate('InterestedEvents')}>
-          <Ionicons name="heart" size={24} color={theme.text} style={{ paddingRight: 16 }} />
-        </TouchableOpacity>
-      )
-    }
-
-    navigation.setOptions({
-      headerLeft,
-      headerRight,
-    })
-  }, [navigation, theme.text, isDark])
+  const filteredEvents = useMemo(() => filterEvents(events, query), [events, query])
 
   if (isRefreshing && events.length === 0) {
     return <ActivityIndicator style={{ marginTop: 40 }} color={theme.text} />
   }
 
-  const filtered = filterEvents(events, query)
-
-  const renderEventList = () => {
-    if (filtered.length === 0 && !isRefreshing) {
-      return (
-        <Text style={{ textAlign: 'center', marginTop: 40, color: theme.text }}>
-          No events found.
-        </Text>
-      )
-    }
-
-    return (
-      <FlatList
-        data={filtered}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => <EventCard event={item} onPress={() => navigation.navigate('EventDetail', { event: item })} />}
-        refreshControl={
-          <RefreshControl
-            refreshing={isRefreshing}
-            onRefresh={refreshEvents}
-            tintColor={theme.text}
-          />
-        }
-      />
-    )
-  }
-
   return (
     <Screen>
       <SearchInput value={query} onChange={setQuery} placeholder="Search by name or location" />
-      { renderEventList() }
+      <FlatList
+        data={filteredEvents}
+        keyExtractor={item => item.id}
+        renderItem={({ item }) => (
+          <EventCard
+            event={item}
+            onPress={() => navigation.navigate('EventDetail', { event: item })}
+          />
+        )}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefreshing}
+            onRefresh={loadEvents}
+            tintColor={theme.text}
+          />
+        }
+        ListEmptyComponent={
+          !isRefreshing ? (
+            <Text style={{ textAlign: 'center', marginTop: 40, color: theme.text }}>
+              No events found.
+            </Text>
+          ) : null
+        }
+      />
     </Screen>
   )
 }

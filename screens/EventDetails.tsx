@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, StyleSheet, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, ScrollView } from 'react-native'
 import { useRoute } from '@react-navigation/native'
 import { useThemeStore } from '../store/useThemeStore'
 import { RootStackParamList } from '../types/navigation'
@@ -7,23 +7,31 @@ import { RouteProp } from '@react-navigation/native'
 import { Screen } from '../components/Screen'
 import Animated from 'react-native-reanimated'
 import { InterestButton } from '../components/InterestButton'
+import { useNavigation } from '@react-navigation/native'
+import { useLayoutEffect } from 'react'
+import { dateFormat } from '../utils/dates'
 
 export default function EventDetailsScreen() {
   const { params } = useRoute<RouteProp<RootStackParamList, 'EventDetail'>>()
+  const navigation = useNavigation()
   const { theme } = useThemeStore()
 
+  useLayoutEffect(() => {
+    navigation.setOptions({ title: params.event.name })
+  }, [navigation, params.event.name])
+
   return (
-    <Screen>
-      <ScrollView contentContainerStyle={styles.container}>
-        <Animated.Image
-          source={{ uri: params.event.image }}
-          style={styles.image}
-          resizeMode="cover"
-          sharedTransitionTag={`event-${params.event.id}`}
-        />
+    <Screen scroll={true} disablePadding={true}>
+      <Animated.Image
+        source={{ uri: params.event.image }}
+        style={styles.image}
+        resizeMode="cover"
+        sharedTransitionTag={`event-${params.event.id}`}
+      />
+      <View style={styles.container}>
         <Text style={[styles.title, { color: theme.text }]}>{params.event.name}</Text>
         <Text style={[styles.subtitle, { color: theme.text }]}>
-          {params.event.date} | {params.event.location}
+          {dateFormat(params.event.date)} | {params.event.location}
         </Text>
         <Text style={[styles.organizer, { color: theme.text }]}>
           Organized by {params.event.organizer}
@@ -32,13 +40,16 @@ export default function EventDetailsScreen() {
           {params.event.description}
         </Text>
         <InterestButton eventId={params.event.id} />
-      </ScrollView>
+      </View>
     </Screen>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    padding: 16,
+    flex: 1,
+  },
   image: {
     width: '100%',
     height: 200,

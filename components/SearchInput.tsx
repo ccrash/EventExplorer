@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, TextInput, StyleSheet } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { useThemeStore } from '../store/useThemeStore'
 
@@ -7,14 +7,26 @@ type Props = {
   value: string
   onChange: (val: string) => void
   placeholder?: string
-  onFilterPress?: () => void // optional callback for filter icon press
+  onFilterPress?: () => void // kept for future use, not currently used
 }
 
-export const SearchInput = ({ value, onChange, placeholder = 'Search...', onFilterPress }: Props) => {
+export const SearchInput = ({
+  value,
+  onChange,
+  placeholder = 'Search...',
+}: Props) => {
   const { theme } = useThemeStore()
 
   return (
-    <View style={[styles.container, { borderColor: theme.border, backgroundColor: theme.background }]}>
+    <View
+      style={[
+        styles.container,
+        {
+          borderColor: theme.border,
+          backgroundColor: theme.background,
+        },
+      ]}
+    >
       <TextInput
         value={value}
         onChangeText={onChange}
@@ -27,9 +39,7 @@ export const SearchInput = ({ value, onChange, placeholder = 'Search...', onFilt
         autoCorrect={false}
         returnKeyType="search"
       />
-      <TouchableOpacity onPress={onFilterPress} accessibilityLabel="Filter options">
-        <Ionicons name="filter" size={20} color="gray" style={styles.icon} />
-      </TouchableOpacity>
+      <Ionicons name="filter" testID="filter-icon" size={20} color="gray" style={styles.icon} />
     </View>
   )
 }
@@ -41,15 +51,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     paddingHorizontal: 12,
-    marginBottom: 16
+    marginBottom: 16,
   },
   input: {
     flex: 1,
     fontSize: 16,
     paddingVertical: 12,
-    paddingRight: 8
+    paddingRight: 8,
   },
   icon: {
-    marginLeft: 8
-  }
+    marginLeft: 8,
+  },
 })

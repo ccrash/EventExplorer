@@ -1,7 +1,7 @@
 import React from 'react'
-import { Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { useEventStore } from '../store/useEventStore'
-import { useInterestMutation } from '../hooks/useEventActions'
+import { useToggleInterest } from '../hooks/useEventActions'
 import { useThemeStore } from '../store/useThemeStore'
 
 type Props = {
@@ -9,32 +9,27 @@ type Props = {
 }
 
 export const InterestButton = ({ eventId }: Props) => {
-  const { interestingIds } = useEventStore()
+  const { interestingIds } = useEventStore() // renamed for clarity
   const { theme } = useThemeStore()
 
   const isInterested = interestingIds.has(eventId)
-  const mutation = useInterestMutation(eventId, isInterested)
+  const { toggle } = useToggleInterest(eventId, isInterested)
 
   return (
     <TouchableOpacity
-      onPress={() => mutation.mutate()}
-      disabled={mutation.isPending}
+      onPress={toggle}
       style={[
         styles.button,
-        { backgroundColor: isInterested ? theme.border : theme.text },
-        mutation.isPending && styles.disabled
+        { backgroundColor: isInterested ? theme.border : theme.text }
+        // Optionally add .disabled style if you track pending state
       ]}
       accessibilityLabel={`${
         isInterested ? 'Remove from' : 'Mark as'
       } interested events`}
     >
-      {mutation.isPending ? (
-        <ActivityIndicator color="#fff" />
-      ) : (
-        <Text style={[styles.label, { color: isInterested ? theme.text : theme.background }]}>
-          {isInterested ? 'Remove from Interested' : 'Mark as Interested'}
-        </Text>
-      )}
+      <Text style={[styles.label, { color: isInterested ? theme.text : theme.background }]}>
+        {isInterested ? 'Remove from Interested' : 'Mark as Interested'}
+      </Text>
     </TouchableOpacity>
   )
 }

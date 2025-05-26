@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { RootStackParamList } from './types/navigation'
 import { DefaultTheme, DarkTheme, NavigationContainer } from '@react-navigation/native'
 import { useThemeStore } from './store/useThemeStore'
@@ -11,7 +10,6 @@ import EventDetails from './screens/EventDetails'
 import InterestedEvents from './screens/InterestedEvents'
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
-const queryClient = new QueryClient()
 
 export default function App() {
   const { isDark } = useThemeStore()
@@ -27,11 +25,9 @@ export default function App() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <QueryClientProvider client={queryClient}>
-        <NavigationContainer theme={theme} key={isDark ? 'dark' : 'light'}>
-          <RootNavigator />
-        </NavigationContainer>
-      </QueryClientProvider>
+      <NavigationContainer theme={theme} key={isDark ? 'dark' : 'light'}>
+        <RootNavigator />
+      </NavigationContainer>
     </GestureHandlerRootView>
   )
 }
