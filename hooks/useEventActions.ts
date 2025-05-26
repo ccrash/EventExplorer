@@ -14,7 +14,6 @@ export const useEventLoader = () => {
       setEvents(data)
     } catch (e) {
       console.error('Failed to load events', e)
-      Alert.alert('Error', 'Unable to load events')
     } finally {
       setIsRefreshing(false)
     }
@@ -23,7 +22,7 @@ export const useEventLoader = () => {
   return { loadEvents }
 }
 
-//  Hook to toggle "interested" state for a given event
+//  Hook to toggle "interest" state for a given event
 export const useToggleInterest = (eventId: string, isCurrentlyInterested: boolean) => {
   const { toggleInterest } = useEventStore()
 
@@ -33,11 +32,8 @@ export const useToggleInterest = (eventId: string, isCurrentlyInterested: boolea
       toggleInterest(eventId)
     } catch (e) {
       console.error('Failed to update interest', e)
-      Alert.alert('Failed to update interest')
     }
   }
 
-  return {
-    toggle
-  }
+  return { toggle }
 }

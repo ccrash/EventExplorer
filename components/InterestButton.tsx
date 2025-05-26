@@ -9,7 +9,7 @@ type Props = {
 }
 
 export const InterestButton = ({ eventId }: Props) => {
-  const { interestingIds } = useEventStore() // renamed for clarity
+  const { interestingIds } = useEventStore() 
   const { theme } = useThemeStore()
 
   const isInterested = interestingIds.has(eventId)
@@ -21,11 +21,8 @@ export const InterestButton = ({ eventId }: Props) => {
       style={[
         styles.button,
         { backgroundColor: isInterested ? theme.border : theme.text }
-        // Optionally add .disabled style if you track pending state
       ]}
-      accessibilityLabel={`${
-        isInterested ? 'Remove from' : 'Mark as'
-      } interested events`}
+      accessibilityLabel={`${isInterested ? 'Remove from' : 'Mark as'} interested events`}
     >
       <Text style={[styles.label, { color: isInterested ? theme.text : theme.background }]}>
         {isInterested ? 'Remove from Interested' : 'Mark as Interested'}
