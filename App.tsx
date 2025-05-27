@@ -21,7 +21,7 @@ export default function App() {
     <Stack.Navigator screenOptions={{headerBackButtonDisplayMode: "minimal", headerTintColor: theme.colors.text}}>
       <Stack.Screen name="EventList" component={EventList} options={{ title: 'Event Explorer' }} />
       <Stack.Screen name="EventDetail" component={EventDetails} options={{ title: 'Details' }} />
-      <Stack.Screen name="InterestedEvents" component={InterestingEvents} options={{ title: 'Interesting Events' }} />
+      <Stack.Screen name="InterestingEvents" component={InterestingEvents} options={{ title: 'Interesting Events' }} />
     </Stack.Navigator>
   )
 
