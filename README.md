@@ -22,30 +22,31 @@ The app features a dynamic event list, interest tracking, theme switching, and s
   ```bash
   yarn start
   ```
-**Download the Expo Go app**
-
-Available on both the iOS App Store and Google Play Store.
-
-**Scan the QR code**
-
-With your phone connected to the same Wi-Fi network, scan the QR code displayed in the terminal or browser with Expo Go to launch the app.
+  
+Scan the QR code displayed in the terminal or browser with Expo Go to launch the app.
 
 ## Features
 
+- **Fully Typed with TypeScript:**  
+  All components, hooks, and utilities are written in strict TypeScript for improved safety and developer experience.
 - **Event Listing:**  
   Browse through a list of upcoming events with images and metadata.
 - **Search Functionality**  
-  Filter events by name or location using a search input.
+  Quickly filter events by name or location using a responsive search input.
 - **Interest Tracking:**  
-  Mark interested events and revisit them in a dedicated screen.
+  Mark interesting events and revisit them in a dedicated screen.
 - **Native Navigation:**
-  Managed via @react-navigation/native-stack for smooth transitions.
+  Smooth and performant screen transitions powered by @react-navigation/native-stack.
 - **Dark/Light Theme Toggle:**  
   Theme switching via a header toggle using Zustand state management.
 - **State Management:**  
   Zustand is used for managing theme and event state.
-- **Responsive Design:**
-  UI is designed to work consistently across both Android and iOS devices.
+- **Offline Capability:**
+  Event data is cached locally to support offline usage.
+- **Mocked API Simulation:**
+  Data is loaded from a local JSON file with artificial latency to simulate network conditions.
+- **Cross-Platform Responsive UI:**
+  Polished, consistent design that works seamlessly on both Android and iOS.
 
 ## Development Considerations:
 This project was completed in approximately 10 hours, with a focus on adhering to the requirements, ensuring clean architecture, quality code, test coverage, and strong separation of concerns.
