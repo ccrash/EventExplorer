@@ -12,24 +12,29 @@ jest.mock('../store/useThemeStore', () => ({
 }))
 
 describe('useHomeHeader', () => {
-  const setOptions = jest.fn()
+  const mockSetOptions = jest.fn()
+  const mockNavigate = jest.fn()
 
   beforeEach(() => {
-    jest.clearAllMocks()
+    jest.clearAllMocks();
 
-    ;(useNavigation as jest.Mock).mockReturnValue({ setOptions, navigate: jest.fn() })
+    (useNavigation as unknown as jest.Mock).mockReturnValue({
+      setOptions: mockSetOptions,
+      navigate: mockNavigate
+    });
 
-    ;(useThemeStore as unknown as jest.Mock).mockReturnValue({
-      theme: { text: 'black' },
+    (useThemeStore as unknown as jest.Mock).mockReturnValue({
+      theme: { background: '#fff', text: '#000' },
       isDark: true,
       toggleTheme: jest.fn()
     })
   })
 
-  it('sets header left and right buttons correctly', () => {
+  it('sets navigation options with themed header and controls', () => {
     renderHook(() => useHomeHeader())
 
-    expect(setOptions).toHaveBeenCalledWith({
+    expect(mockSetOptions).toHaveBeenCalledWith({
+      headerStyle: { backgroundColor: '#fff' },
       headerLeft: expect.any(Function),
       headerRight: expect.any(Function)
     })

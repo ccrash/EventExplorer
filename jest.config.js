@@ -11,6 +11,17 @@ module.exports = {
     },
   },
   moduleNameMapper: {
-    '^@expo/vector-icons/Ionicons$': '<rootDir>/__mocks__/IoniconsMock.js'
-  }
+    '^@expo/vector-icons/Ionicons$': '<rootDir>/__mocks__/IoniconsMock.js',
+    'react-native-reanimated': '<rootDir>/__mocks__/react-native-reanimated.js'
+  },
+  collectCoverage: true,
+  collectCoverageFrom: [
+    'components/**/*.{ts,tsx}',
+    'hooks/**/*.{ts,tsx}',
+    'store/**/*.{ts,tsx}',
+    'utils/**/*.{ts,tsx}',
+    'screens/**/*.{ts,tsx}',
+    'services/**/*.{ts,tsx}'
+  ],
+  coverageReporters: ['text', 'lcov']
 }

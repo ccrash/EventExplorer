@@ -12,7 +12,7 @@ type Props = {
   onPress?: () => void
 }
 
-export default function EventCard({ event, onPress }: Props) {
+export const EventCard = ({ event, onPress }: Props) => {
   const { theme } = useThemeStore()
   const { interestingIds } = useEventStore()
   const isInterested = interestingIds.has(event.id)
@@ -35,7 +35,7 @@ export default function EventCard({ event, onPress }: Props) {
         <Text style={[styles.title, { color: theme.text }]}>{event.name}</Text>
         <Text style={[styles.subtext, { color: theme.text }]}>{dateFormat(event.date)}</Text>
         <Text style={[styles.location, { color: theme.text }]}>{event.location}</Text>
-        {isInterested && (<Ionicons name="alert-circle" size={20} color="gray" style={styles.interestIcon}/> )}
+        {isInterested && (<Ionicons testID="interest-icon" name="alert-circle" size={20} color="gray" style={styles.interestIcon}/> )}
       </View>
     </TouchableOpacity>
   )

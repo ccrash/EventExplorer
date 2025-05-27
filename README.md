@@ -4,7 +4,15 @@ EventExplorer is a mobile application built with Expo and React Native that allo
 
 The app features a dynamic event list, interest tracking, theme switching, and smooth navigation between screens.
 
-## Installation Guide
+## Installation
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/)
+- [Yarn](https://yarnpkg.com/)
+- [Expo Go](https://expo.dev/client) app on iOS or Android
+
+### Steps
 
 **Install dependecies:**
   ```bash
@@ -20,7 +28,7 @@ Available on both the iOS App Store and Google Play Store.
 
 **Scan the QR code**
 
-With your phone connected to the same Wi-Fi network, scan the QR code displayed by the Expo server to launch the app.
+With your phone connected to the same Wi-Fi network, scan the QR code displayed in the terminal or browser with Expo Go to launch the app.
 
 ## Features
 
@@ -42,14 +50,13 @@ With your phone connected to the same Wi-Fi network, scan the QR code displayed 
 ## Development Considerations:
 This project was completed in approximately 10 hours, with a focus on adhering to the requirements, ensuring clean architecture, quality code, test coverage, and strong separation of concerns.
 
-If more time were available, the following improvements would be prioritized:
+### Potential Improvements with More Time
 
 - Splash Screen & Icons: A polished first impression is crucial. Custom splash screens and adaptive icons would enhance professionalism.
 - UI/UX Refinements: Further visual polish with smoother transitions, micro-interactions, and layout improvements.
 - Localization: Add multi-language support to improve accessibility and usability for international users.
 
 ## Known Bugs
-- On Android, the header may not display the "Interested" button. This appears to be a known issue with Expo SDK 53. I haven't had the time to downgrade and confirm it yet.
-https://github.com/expo/expo/issues/36793
+- On Android, the header may not show the "Interested" icon. This may be related to [Expo SDK 53](https://github.com/expo/expo/issues/36793). Downgrade testing pending.
 
 

@@ -5,7 +5,7 @@ import { useThemeStore } from '../store/useThemeStore'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../types/navigation'
-import EventCard from '../components/EventCard'
+import { EventCard } from '../components/EventCard'
 
 export default function InterestingEvents() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()

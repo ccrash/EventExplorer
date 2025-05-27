@@ -3,7 +3,7 @@ import { View, Text, FlatList, RefreshControl, ActivityIndicator, StyleSheet } f
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../types/navigation'
-import EventCard from '../components/EventCard'
+import { EventCard} from '../components/EventCard'
 import { SearchInput } from '../components/SearchInput'
 import { filterEvents } from '../utils/filterEvents'
 import { useEventStore } from '../store/useEventStore'
@@ -29,7 +29,7 @@ export default function EventListScreen() {
   const filteredEvents = useMemo(() => filterEvents(events, query), [events, query])
 
   if (isRefreshing && events.length === 0) {
-    return <ActivityIndicator style={{ marginTop: 40 }} color={theme.text} />
+    return <ActivityIndicator testID="ActivityIndicator" style={{ marginTop: 40 }} color={theme.text} />
   }
 
   return (
@@ -62,7 +62,6 @@ export default function EventListScreen() {
     </View>
   )
 }
-
 
 const styles = StyleSheet.create({
   container: {

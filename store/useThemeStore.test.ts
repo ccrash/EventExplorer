@@ -1,4 +1,3 @@
-import { act } from 'react-test-renderer'
 import { useThemeStore } from '../store/useThemeStore'
 import { lightTheme, darkTheme } from '../theme/theme'
 
@@ -18,9 +17,7 @@ describe('useThemeStore', () => {
   })
 
   it('toggles to dark theme', () => {
-    act(() => {
-      useThemeStore.getState().toggleTheme()
-    })
+    useThemeStore.getState().toggleTheme()
 
     const { isDark, theme } = useThemeStore.getState()
     expect(isDark).toBe(true)
@@ -28,12 +25,9 @@ describe('useThemeStore', () => {
   })
 
   it('toggles back to light theme', () => {
-    act(() => {
-      useThemeStore.getState().toggleTheme()
-    })
-    act(() => {
-      useThemeStore.getState().toggleTheme()
-    })
+    const store = useThemeStore.getState()
+    store.toggleTheme()
+    store.toggleTheme()
 
     const { isDark, theme } = useThemeStore.getState()
     expect(isDark).toBe(false)

@@ -16,7 +16,7 @@ export const useHomeHeader = () => {
     navigation.setOptions({
       headerStyle: { backgroundColor: theme.background },
       headerLeft: () => renderHeaderLeft(isDark, toggleTheme, theme.text),
-      headerRight: () => renderHeaderRight(theme.text, () => navigation.navigate('InterestedEvents'))
+      headerRight: () => renderHeaderRight(theme.text, () => navigation.navigate('InterestingEvents'))
     })
   }, [navigation, isDark, toggleTheme, theme.text])
 }
