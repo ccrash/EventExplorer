@@ -1,14 +1,13 @@
 import React from 'react'
-import { FlatList, Text, StyleSheet } from 'react-native'
+import { View, FlatList, Text, StyleSheet } from 'react-native'
 import { useEventStore } from '../store/useEventStore'
 import { useThemeStore } from '../store/useThemeStore'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../types/navigation'
 import EventCard from '../components/EventCard'
-import { Screen } from '../components/Screen'
 
-export default function InterestedEvents() {
+export default function InterestingEvents() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
   const { events, interestingIds } = useEventStore()
   const { theme } = useThemeStore()
@@ -33,13 +32,17 @@ export default function InterestedEvents() {
   )
 
   return (
-    <Screen style={interestedEvents.length === 0 ? styles.emptyContainer : undefined}>
+    <View style={interestedEvents.length === 0 ? styles.emptyContainer : styles.container}>
       {interestedEvents.length === 0 ? renderEmptyState() : renderEventList()}
-    </Screen>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
+  container: {
+    padding: 16,
+    flex: 1,
+  },
   emptyContainer: {
     justifyContent: 'center',
     alignItems: 'center'

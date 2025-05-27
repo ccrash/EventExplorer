@@ -18,10 +18,7 @@ export const InterestButton = ({ eventId }: Props) => {
   return (
     <TouchableOpacity
       onPress={toggle}
-      style={[
-        styles.button,
-        { backgroundColor: isInterested ? theme.border : theme.text }
-      ]}
+      style={[styles.button, { backgroundColor: isInterested ? theme.border : theme.text }]}
       accessibilityLabel={`${isInterested ? 'Remove from' : 'Mark as'} interested events`}
     >
       <Text style={[styles.label, { color: isInterested ? theme.text : theme.background }]}>

@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { Text, FlatList, RefreshControl, ActivityIndicator } from 'react-native'
+import { View, Text, FlatList, RefreshControl, ActivityIndicator, StyleSheet } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../types/navigation'
@@ -10,7 +10,6 @@ import { useEventStore } from '../store/useEventStore'
 import { useThemeStore } from '../store/useThemeStore'
 import { useEventLoader } from '../hooks/useEventActions'
 import { useHomeHeader } from '../hooks/useHomeHeader'
-import { Screen } from '../components/Screen'
 
 type Navigation = NativeStackNavigationProp<RootStackParamList>
 
@@ -34,7 +33,7 @@ export default function EventListScreen() {
   }
 
   return (
-    <Screen>
+    <View style={styles.container}>
       <SearchInput value={query} onChange={setQuery} placeholder="Search by name or location" />
       <FlatList
         data={filteredEvents}
@@ -60,6 +59,14 @@ export default function EventListScreen() {
           ) : null
         }
       />
-    </Screen>
+    </View>
   )
 }
+
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 16,
+    flex: 1,
+  }
+})

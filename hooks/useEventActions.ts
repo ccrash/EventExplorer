@@ -1,6 +1,5 @@
 import { useCallback } from 'react'
-import { Alert } from 'react-native'
-import { fetchEvents, showInterest } from '../services/api'
+import { fetchEvents } from '../services/api'
 import { useEventStore } from '../store/useEventStore'
 
 // Hook to load event list into the global store
@@ -27,12 +26,7 @@ export const useToggleInterest = (eventId: string, isCurrentlyInterested: boolea
   const { toggleInterest } = useEventStore()
 
   const toggle = async () => {
-    try {
-      await showInterest(eventId, !isCurrentlyInterested)
       toggleInterest(eventId)
-    } catch (e) {
-      console.error('Failed to update interest', e)
-    }
   }
 
   return { toggle }

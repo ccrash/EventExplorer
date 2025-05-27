@@ -21,7 +21,7 @@ export default function EventCard({ event, onPress }: Props) {
     <TouchableOpacity
       onPress={onPress}
       accessibilityLabel={`View details for ${event.name}`}
-      style={[styles.card, { borderColor: theme.border }]}
+      style={[styles.card, { borderColor: theme.border, backgroundColor: theme.background }]}
     >
       <View style={styles.imageContainer}>
         <Animated.Image
@@ -35,7 +35,7 @@ export default function EventCard({ event, onPress }: Props) {
         <Text style={[styles.title, { color: theme.text }]}>{event.name}</Text>
         <Text style={[styles.subtext, { color: theme.text }]}>{dateFormat(event.date)}</Text>
         <Text style={[styles.location, { color: theme.text }]}>{event.location}</Text>
-        {isInterested && (<Ionicons name="alert-circle" size={20} color="orange" style={styles.interestIcon}/> )}
+        {isInterested && (<Ionicons name="alert-circle" size={20} color="gray" style={styles.interestIcon}/> )}
       </View>
     </TouchableOpacity>
   )
@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
   },
   interestIcon: {
     position: 'absolute',
-    bottom: 4,
-    right: 4,
+    bottom: 6,
+    right: 6,
     backgroundColor: 'white',
     borderRadius: 10
   },

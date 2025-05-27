@@ -14,6 +14,7 @@ export const useHomeHeader = () => {
 
   useEffect(() => {
     navigation.setOptions({
+      headerStyle: { backgroundColor: theme.background },
       headerLeft: () => renderHeaderLeft(isDark, toggleTheme, theme.text),
       headerRight: () => renderHeaderRight(theme.text, () => navigation.navigate('InterestedEvents'))
     })
@@ -44,7 +45,7 @@ function renderHeaderRight(
   return (
     <TouchableOpacity onPress={onPress}>
       <Ionicons
-        name="heart"
+        name="alert-circle"
         size={24}
         color={textColor}
         style={{ paddingRight: 16 }}
