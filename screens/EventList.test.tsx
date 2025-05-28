@@ -1,11 +1,11 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react-native'
+import {render, fireEvent} from '@testing-library/react-native'
 import EventListScreen from './EventList'
-import { useEventStore } from '../store/useEventStore'
-import { useThemeStore } from '../store/useThemeStore'
-import { useEventLoader } from '../hooks/useEventActions'
-import { useHomeHeader } from '../hooks/useHomeHeader'
-import { useNavigation } from '@react-navigation/native'
+import {useEventStore} from '../store/useEventStore'
+import {useThemeStore} from '../store/useThemeStore'
+import {useEventLoader} from '../hooks/useEventActions'
+import {useHomeHeader} from '../hooks/useHomeHeader'
+import {useNavigation} from '@react-navigation/native'
 
 jest.mock('../store/useEventStore')
 jest.mock('../store/useThemeStore')
@@ -15,8 +15,8 @@ jest.mock('@react-navigation/native', () => ({
   useNavigation: jest.fn()
 }))
 jest.mock('../components/EventCard', () => ({
-  EventCard: ({ event, onPress }: any) => {
-    const { Text, TouchableOpacity } = require('react-native')
+  EventCard: ({event, onPress}: any) => {
+    const {Text, TouchableOpacity} = require('react-native')
     return (
       <TouchableOpacity onPress={onPress}>
         <Text>{event.name}</Text>
@@ -25,15 +25,10 @@ jest.mock('../components/EventCard', () => ({
   }
 }))
 jest.mock('../components/SearchInput', () => ({
-  SearchInput: ({ value, onChange }: any) => {
-    const { TextInput } = require('react-native')
+  SearchInput: ({value, onChange}: any) => {
+    const {TextInput} = require('react-native')
     return (
-      <TextInput
-        value={value}
-        onChangeText={onChange}
-        testID="search-input"
-        placeholder="Search"
-      />
+      <TextInput value={value} onChangeText={onChange} testID="search-input" placeholder="Search" />
     )
   }
 }))
@@ -44,11 +39,10 @@ describe('EventListScreen', () => {
 
   beforeEach(() => {
     jest.clearAllMocks()
-
-    ;(useNavigation as never as jest.Mock).mockReturnValue({ navigate: mockNavigate })
+    ;(useNavigation as never as jest.Mock).mockReturnValue({navigate: mockNavigate})
     ;(useHomeHeader as never as jest.Mock).mockReturnValue(undefined)
     ;(useThemeStore as never as jest.Mock).mockReturnValue({
-      theme: { text: '#000' }
+      theme: {text: '#000'}
     })
     ;(useEventLoader as jest.Mock).mockReturnValue({
       loadEvents: mockLoadEvents
@@ -61,41 +55,84 @@ describe('EventListScreen', () => {
       isRefreshing: true
     })
 
-    const { getByTestId } = render(<EventListScreen />)
+    const {getByTestId} = render(<EventListScreen />)
     expect(getByTestId('ActivityIndicator')).toBeTruthy()
   })
 
   it('displays list of events', () => {
     ;(useEventStore as never as jest.Mock).mockReturnValue({
-      events: [{ id: '1', name: 'Event A', date: '', location: '', image: '', thumbnail: '', description: '', organizer: '' }],
+      events: [
+        {
+          id: '1',
+          name: 'Event A',
+          date: '',
+          location: '',
+          image: '',
+          thumbnail: '',
+          description: '',
+          organizer: ''
+        }
+      ],
       isRefreshing: false
     })
 
-    const { getByText } = render(<EventListScreen />)
+    const {getByText} = render(<EventListScreen />)
     expect(getByText('Event A')).toBeTruthy()
   })
 
   it('navigates on event press', () => {
     ;(useEventStore as never as jest.Mock).mockReturnValue({
-      events: [{ id: '1', name: 'Event A', date: '', location: '', image: '', thumbnail: '', description: '', organizer: '' }],
+      events: [
+        {
+          id: '1',
+          name: 'Event A',
+          date: '',
+          location: '',
+          image: '',
+          thumbnail: '',
+          description: '',
+          organizer: ''
+        }
+      ],
       isRefreshing: false
     })
 
-    const { getByText } = render(<EventListScreen />)
+    const {getByText} = render(<EventListScreen />)
     fireEvent.press(getByText('Event A'))
-    expect(mockNavigate).toHaveBeenCalledWith('EventDetail', expect.objectContaining({ event: expect.any(Object) }))
+    expect(mockNavigate).toHaveBeenCalledWith(
+      'EventDetail',
+      expect.objectContaining({event: expect.any(Object)})
+    )
   })
 
   it('filters events based on search', () => {
     ;(useEventStore as never as jest.Mock).mockReturnValue({
       events: [
-        { id: '1', name: 'Music Festival', date: '', location: '', image: '', thumbnail: '', description: '', organizer: '' },
-        { id: '2', name: 'Tech Conference', date: '', location: '', image: '', thumbnail: '', description: '', organizer: '' }
+        {
+          id: '1',
+          name: 'Music Festival',
+          date: '',
+          location: '',
+          image: '',
+          thumbnail: '',
+          description: '',
+          organizer: ''
+        },
+        {
+          id: '2',
+          name: 'Tech Conference',
+          date: '',
+          location: '',
+          image: '',
+          thumbnail: '',
+          description: '',
+          organizer: ''
+        }
       ],
       isRefreshing: false
     })
 
-    const { queryByText, getByTestId } = render(<EventListScreen />)
+    const {queryByText, getByTestId} = render(<EventListScreen />)
     fireEvent.changeText(getByTestId('search-input'), 'Tech')
     expect(queryByText('Tech Conference')).toBeTruthy()
     expect(queryByText('Music Festival')).toBeNull()
@@ -107,7 +144,7 @@ describe('EventListScreen', () => {
       isRefreshing: false
     })
 
-    const { getByText } = render(<EventListScreen />)
+    const {getByText} = render(<EventListScreen />)
     expect(getByText('No events found.')).toBeTruthy()
   })
 })

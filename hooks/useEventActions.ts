@@ -1,10 +1,10 @@
-import { useCallback } from 'react'
-import { fetchEvents } from '../services/api'
-import { useEventStore } from '../store/useEventStore'
+import {useCallback} from 'react'
+import {fetchEvents} from '../services/api'
+import {useEventStore} from '../store/useEventStore'
 
 // Hook to load event list into the global store
 export const useEventLoader = () => {
-  const { setEvents, setIsRefreshing } = useEventStore()
+  const {setEvents, setIsRefreshing} = useEventStore()
 
   const loadEvents = useCallback(async () => {
     try {
@@ -18,16 +18,16 @@ export const useEventLoader = () => {
     }
   }, [setEvents, setIsRefreshing])
 
-  return { loadEvents }
+  return {loadEvents}
 }
 
 //  Hook to toggle "interest" state for a given event
 export const useToggleInterest = (eventId: string, isCurrentlyInterested: boolean) => {
-  const { toggleInterest } = useEventStore()
+  const {toggleInterest} = useEventStore()
 
   const toggle = async () => {
-      toggleInterest(eventId)
+    toggleInterest(eventId)
   }
 
-  return { toggle }
+  return {toggle}
 }

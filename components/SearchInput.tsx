@@ -1,7 +1,7 @@
 import React from 'react'
-import { View, TextInput, StyleSheet } from 'react-native'
+import {View, TextInput, StyleSheet} from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons'
-import { useThemeStore } from '../store/useThemeStore'
+import {useThemeStore} from '../store/useThemeStore'
 
 type Props = {
   value: string
@@ -10,22 +10,12 @@ type Props = {
   onFilterPress?: () => void // kept for future use, not currently used
 }
 
-export const SearchInput = ({
-  value,
-  onChange,
-  placeholder = 'Search...',
-}: Props) => {
-  const { theme } = useThemeStore()
+export const SearchInput = ({value, onChange, placeholder = 'Search...'}: Props) => {
+  const {theme} = useThemeStore()
 
   return (
     <View
-      style={[
-        styles.container,
-        {
-          borderColor: theme.border,
-          backgroundColor: theme.background,
-        },
-      ]}
+      style={[styles.container, {borderColor: theme.border, backgroundColor: theme.background}]}
     >
       <TextInput
         value={value}
@@ -34,7 +24,7 @@ export const SearchInput = ({
         placeholderTextColor={theme.text}
         accessibilityLabel={placeholder}
         accessibilityRole="search"
-        style={[styles.input, { color: theme.text }]}
+        style={[styles.input, {color: theme.text}]}
         autoCapitalize="none"
         autoCorrect={false}
         returnKeyType="search"
@@ -51,15 +41,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     paddingHorizontal: 12,
-    marginBottom: 16,
+    marginBottom: 16
   },
   input: {
     flex: 1,
     fontSize: 16,
     paddingVertical: 12,
-    paddingRight: 8,
+    paddingRight: 8
   },
   icon: {
-    marginLeft: 8,
-  },
+    marginLeft: 8
+  }
 })

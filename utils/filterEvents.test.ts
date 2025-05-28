@@ -1,5 +1,5 @@
-import { filterEvents } from './filterEvents'
-import { Event } from '../types/event'
+import {filterEvents} from './filterEvents'
+import {Event} from '../types/event'
 
 const mockEvents: Event[] = [
   {

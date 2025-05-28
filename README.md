@@ -15,14 +15,17 @@ The app features a dynamic event list, interest tracking, theme switching, and s
 ### Steps
 
 **Install dependecies:**
-  ```bash
-  yarn install
-  ```
+
+```bash
+yarn install
+```
+
 **Run the project locally**
-  ```bash
-  yarn start
-  ```
-  
+
+```bash
+yarn start
+```
+
 Scan the QR code displayed in the terminal or browser with Expo Go to launch the app.
 
 ## Features
@@ -49,6 +52,7 @@ Scan the QR code displayed in the terminal or browser with Expo Go to launch the
   Polished, consistent design that works seamlessly on both Android and iOS.
 
 ## Development Considerations:
+
 This project was completed in approximately 10 hours, with a focus on adhering to the requirements, ensuring clean architecture, quality code, test coverage, and strong separation of concerns.
 
 ### Potential Improvements with More Time
@@ -58,6 +62,5 @@ This project was completed in approximately 10 hours, with a focus on adhering t
 - Localization: Add multi-language support to improve accessibility and usability for international users.
 
 ## Known Bugs
+
 - On Android, the header may not show the "Interested" icon. This may be related to [Expo SDK 53](https://github.com/expo/expo/issues/36793). Downgrade testing pending.
-
-

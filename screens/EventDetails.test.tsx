@@ -1,8 +1,8 @@
 import React from 'react'
-import { render } from '@testing-library/react-native'
+import {render} from '@testing-library/react-native'
 import EventDetailsScreen from './EventDetails'
-import { useRoute, useNavigation } from '@react-navigation/native'
-import { useThemeStore } from '../store/useThemeStore'
+import {useRoute, useNavigation} from '@react-navigation/native'
+import {useThemeStore} from '../store/useThemeStore'
 
 jest.mock('@react-navigation/native', () => ({
   useRoute: jest.fn(),
@@ -14,8 +14,8 @@ jest.mock('../store/useThemeStore', () => ({
 }))
 
 jest.mock('../components/InterestButton', () => ({
-  InterestButton: ({ eventId }: { eventId: string }) => {
-    const { Text } = require('react-native')
+  InterestButton: ({eventId}: {eventId: string}) => {
+    const {Text} = require('react-native')
     return <Text>InterestButton: {eventId}</Text>
   }
 }))
@@ -35,15 +35,12 @@ describe('EventDetailsScreen', () => {
 
   beforeEach(() => {
     jest.clearAllMocks()
-
     ;(useRoute as jest.Mock).mockReturnValue({
-      params: { event: mockEvent }
+      params: {event: mockEvent}
     })
-
     ;(useNavigation as jest.Mock).mockReturnValue({
       setOptions: mockSetOptions
     })
-
     ;(useThemeStore as never as jest.Mock).mockReturnValue({
       theme: {
         text: '#000',
@@ -54,7 +51,7 @@ describe('EventDetailsScreen', () => {
   })
 
   it('renders event details', () => {
-    const { getByText } = render(<EventDetailsScreen />)
+    const {getByText} = render(<EventDetailsScreen />)
 
     expect(getByText('Sample Event')).toBeTruthy()
     expect(getByText('01 Jun 24')).toBeTruthy()
@@ -66,6 +63,6 @@ describe('EventDetailsScreen', () => {
 
   it('sets navigation title to event name', () => {
     render(<EventDetailsScreen />)
-    expect(mockSetOptions).toHaveBeenCalledWith({ title: 'Sample Event' })
+    expect(mockSetOptions).toHaveBeenCalledWith({title: 'Sample Event'})
   })
 })

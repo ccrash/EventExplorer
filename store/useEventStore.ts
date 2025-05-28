@@ -1,7 +1,7 @@
-import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import {create} from 'zustand'
+import {persist} from 'zustand/middleware'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { Event } from '../types/event'
+import {Event} from '../types/event'
 
 type State = {
   events: Event[]
@@ -17,14 +17,14 @@ export const useEventStore = create<State>()(
     (set, get) => ({
       events: [],
       interestingIds: new Set(),
-      setEvents: (events) => set({ events }),
-      toggleInterest: (id) => {
+      setEvents: events => set({events}),
+      toggleInterest: id => {
         const ids = new Set(get().interestingIds)
         ids.has(id) ? ids.delete(id) : ids.add(id)
-        set({ interestingIds: ids })
+        set({interestingIds: ids})
       },
       isRefreshing: false,
-      setIsRefreshing: (b) => set({ isRefreshing: b })
+      setIsRefreshing: b => set({isRefreshing: b})
     }),
     {
       name: 'event-storage',
@@ -38,7 +38,7 @@ export const useEventStore = create<State>()(
         },
         removeItem: AsyncStorage.removeItem
       },
-      partialize: ({ events, interestingIds }) => ({
+      partialize: ({events, interestingIds}) => ({
         events,
         interestingIds: Array.from(interestingIds)
       }),

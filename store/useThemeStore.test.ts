@@ -1,5 +1,5 @@
-import { useThemeStore } from '../store/useThemeStore'
-import { lightTheme, darkTheme } from '../theme/theme'
+import {useThemeStore} from '../store/useThemeStore'
+import {lightTheme, darkTheme} from '../theme/theme'
 
 describe('useThemeStore', () => {
   beforeEach(() => {
@@ -11,7 +11,7 @@ describe('useThemeStore', () => {
   })
 
   it('initializes with light theme', () => {
-    const { isDark, theme } = useThemeStore.getState()
+    const {isDark, theme} = useThemeStore.getState()
     expect(isDark).toBe(false)
     expect(theme).toEqual(lightTheme)
   })
@@ -19,7 +19,7 @@ describe('useThemeStore', () => {
   it('toggles to dark theme', () => {
     useThemeStore.getState().toggleTheme()
 
-    const { isDark, theme } = useThemeStore.getState()
+    const {isDark, theme} = useThemeStore.getState()
     expect(isDark).toBe(true)
     expect(theme).toEqual(darkTheme)
   })
@@ -29,7 +29,7 @@ describe('useThemeStore', () => {
     store.toggleTheme()
     store.toggleTheme()
 
-    const { isDark, theme } = useThemeStore.getState()
+    const {isDark, theme} = useThemeStore.getState()
     expect(isDark).toBe(false)
     expect(theme).toEqual(lightTheme)
   })

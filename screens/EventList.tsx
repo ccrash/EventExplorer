@@ -1,23 +1,23 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import { View, Text, FlatList, RefreshControl, ActivityIndicator, StyleSheet } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { RootStackParamList } from '../types/navigation'
-import { EventCard} from '../components/EventCard'
-import { SearchInput } from '../components/SearchInput'
-import { filterEvents } from '../utils/filterEvents'
-import { useEventStore } from '../store/useEventStore'
-import { useThemeStore } from '../store/useThemeStore'
-import { useEventLoader } from '../hooks/useEventActions'
-import { useHomeHeader } from '../hooks/useHomeHeader'
+import React, {useEffect, useMemo, useState} from 'react'
+import {View, Text, FlatList, RefreshControl, ActivityIndicator, StyleSheet} from 'react-native'
+import {useNavigation} from '@react-navigation/native'
+import {NativeStackNavigationProp} from '@react-navigation/native-stack'
+import {RootStackParamList} from '../types/navigation'
+import {EventCard} from '../components/EventCard'
+import {SearchInput} from '../components/SearchInput'
+import {filterEvents} from '../utils/filterEvents'
+import {useEventStore} from '../store/useEventStore'
+import {useThemeStore} from '../store/useThemeStore'
+import {useEventLoader} from '../hooks/useEventActions'
+import {useHomeHeader} from '../hooks/useHomeHeader'
 
 type Navigation = NativeStackNavigationProp<RootStackParamList>
 
 export default function EventListScreen() {
   const navigation = useNavigation<Navigation>()
-  const { theme } = useThemeStore()
-  const { events, isRefreshing } = useEventStore()
-  const { loadEvents } = useEventLoader()
+  const {theme} = useThemeStore()
+  const {events, isRefreshing} = useEventStore()
+  const {loadEvents} = useEventLoader()
   const [query, setQuery] = useState('')
 
   useHomeHeader() // handles navigation header setup + theme toggling
@@ -29,7 +29,9 @@ export default function EventListScreen() {
   const filteredEvents = useMemo(() => filterEvents(events, query), [events, query])
 
   if (isRefreshing && events.length === 0) {
-    return <ActivityIndicator testID="ActivityIndicator" style={{ marginTop: 40 }} color={theme.text} />
+    return (
+      <ActivityIndicator testID="ActivityIndicator" style={{marginTop: 40}} color={theme.text} />
+    )
   }
 
   return (
@@ -38,22 +40,18 @@ export default function EventListScreen() {
       <FlatList
         data={filteredEvents}
         keyExtractor={item => item.id}
-        renderItem={({ item }) => (
+        renderItem={({item}) => (
           <EventCard
             event={item}
-            onPress={() => navigation.navigate('EventDetail', { event: item })}
+            onPress={() => navigation.navigate('EventDetail', {event: item})}
           />
         )}
         refreshControl={
-          <RefreshControl
-            refreshing={isRefreshing}
-            onRefresh={loadEvents}
-            tintColor={theme.text}
-          />
+          <RefreshControl refreshing={isRefreshing} onRefresh={loadEvents} tintColor={theme.text} />
         }
         ListEmptyComponent={
           !isRefreshing ? (
-            <Text style={{ textAlign: 'center', marginTop: 40, color: theme.text }}>
+            <Text style={{textAlign: 'center', marginTop: 40, color: theme.text}}>
               No events found.
             </Text>
           ) : null
@@ -66,6 +64,6 @@ export default function EventListScreen() {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-    flex: 1,
+    flex: 1
   }
 })

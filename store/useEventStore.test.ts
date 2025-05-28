@@ -1,13 +1,13 @@
-import { renderHook, act } from '@testing-library/react-hooks'
-import { useEventStore } from './useEventStore'
-import { Event } from '../types/event'
+import {renderHook, act} from '@testing-library/react-hooks'
+import {useEventStore} from './useEventStore'
+import {Event} from '../types/event'
 
 describe('useEventStore', () => {
   beforeEach(() => {
     useEventStore.setState({
       events: [],
       interestingIds: new Set(),
-      isRefreshing: false,
+      isRefreshing: false
     })
   })
 
@@ -20,19 +20,19 @@ describe('useEventStore', () => {
       image: '',
       thumbnail: '',
       organizer: '',
-      description: '',
-    },
+      description: ''
+    }
   ]
 
   it('should start with empty state', () => {
-    const { result } = renderHook(() => useEventStore())
+    const {result} = renderHook(() => useEventStore())
     expect(result.current.events).toEqual([])
     expect(result.current.interestingIds).toEqual(new Set())
     expect(result.current.isRefreshing).toBe(false)
   })
 
   it('should set events', () => {
-    const { result } = renderHook(() => useEventStore())
+    const {result} = renderHook(() => useEventStore())
     act(() => {
       result.current.setEvents(mockEvents)
     })
@@ -40,7 +40,7 @@ describe('useEventStore', () => {
   })
 
   it('should toggle interest correctly', () => {
-    const { result } = renderHook(() => useEventStore())
+    const {result} = renderHook(() => useEventStore())
 
     act(() => {
       result.current.toggleInterest('1')
@@ -54,7 +54,7 @@ describe('useEventStore', () => {
   })
 
   it('should set isRefreshing', () => {
-    const { result } = renderHook(() => useEventStore())
+    const {result} = renderHook(() => useEventStore())
     act(() => {
       result.current.setIsRefreshing(true)
     })

@@ -1,4 +1,4 @@
-import { fetchEvents } from '../services/api'
+import {fetchEvents} from '../services/api'
 import eventsData from '../data/events.json'
 
 jest.useFakeTimers()

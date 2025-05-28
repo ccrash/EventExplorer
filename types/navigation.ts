@@ -1,7 +1,7 @@
-import { Event } from './event'
+import {Event} from './event'
 
 export type RootStackParamList = {
   EventList: undefined
-  EventDetail: { event: Event }
+  EventDetail: {event: Event}
   InterestingEvents: undefined
 }

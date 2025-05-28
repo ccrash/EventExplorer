@@ -1,6 +1,6 @@
-import { renderHook, act } from '@testing-library/react-hooks'
-import { useEventLoader, useToggleInterest } from '../hooks/useEventActions'
-import { useEventStore } from '../store/useEventStore'
+import {renderHook, act} from '@testing-library/react-hooks'
+import {useEventLoader, useToggleInterest} from '../hooks/useEventActions'
+import {useEventStore} from '../store/useEventStore'
 import * as api from '../services/api'
 
 jest.mock('../store/useEventStore')
@@ -19,19 +19,18 @@ describe('useEventLoader', () => {
   const setIsRefreshing = jest.fn()
 
   beforeEach(() => {
-    jest.clearAllMocks();
-
-    (useEventStore as unknown as jest.Mock).mockReturnValue({
+    jest.clearAllMocks()
+    ;(useEventStore as unknown as jest.Mock).mockReturnValue({
       setEvents,
       setIsRefreshing
     })
   })
 
   it('loads events and updates the store', async () => {
-    const mockData = [{ id: '1', name: 'Test Event' }];
-    (api.fetchEvents as jest.Mock).mockResolvedValue(mockData)
+    const mockData = [{id: '1', name: 'Test Event'}]
+    ;(api.fetchEvents as jest.Mock).mockResolvedValue(mockData)
 
-    const { result } = renderHook(() => useEventLoader())
+    const {result} = renderHook(() => useEventLoader())
 
     await act(async () => {
       await result.current.loadEvents()
@@ -44,9 +43,9 @@ describe('useEventLoader', () => {
   })
 
   it('handles fetch failure', async () => {
-    (api.fetchEvents as jest.Mock).mockRejectedValue(new Error('fail'))
+    ;(api.fetchEvents as jest.Mock).mockRejectedValue(new Error('fail'))
 
-    const { result } = renderHook(() => useEventLoader())
+    const {result} = renderHook(() => useEventLoader())
 
     await act(async () => {
       await result.current.loadEvents()
@@ -61,11 +60,11 @@ describe('useToggleInterest', () => {
   const toggleInterest = jest.fn()
 
   beforeEach(() => {
-    (useEventStore as unknown as jest.Mock).mockReturnValue({ toggleInterest })
+    ;(useEventStore as unknown as jest.Mock).mockReturnValue({toggleInterest})
   })
 
   it('toggles interest state', async () => {
-    const { result } = renderHook(() => useToggleInterest('123', true))
+    const {result} = renderHook(() => useToggleInterest('123', true))
 
     await act(async () => {
       await result.current.toggle()
