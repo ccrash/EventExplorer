@@ -4,6 +4,11 @@ EventExplorer is a mobile application built with Expo and React Native that allo
 
 The app features a dynamic event list, interest tracking, theme switching, and smooth navigation between screens.
 
+![alt text](https://github.com/ccrash/EventExplorer/tree/main/assets/screen_0.png?raw=true)
+![alt text](https://github.com/ccrash/EventExplorer/tree/main/assets/screen_1.png?raw=true)
+![alt text](https://github.com/ccrash/EventExplorer/tree/main/assets/screen_2.png?raw=true)
+![alt text](https://github.com/ccrash/EventExplorer/tree/main/assets/screen_3.png?raw=true)
+
 ## Installation
 
 ### Prerequisites
@@ -63,4 +68,4 @@ This project was completed in approximately 10 hours, with a focus on adhering t
 
 ## Known Bugs
 
-- On Android, the header may not show the "Interested" icon. This may be related to [Expo SDK 53](https://github.com/expo/expo/issues/36793). Downgrade testing pending.
+- On Android, the header may not show the "Interested" icon. This may be related to [Expo SDK 53](https://github.com/expo/expo/issues/36793). Downgrade/Upgrade testing pending.
