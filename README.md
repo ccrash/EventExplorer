@@ -9,6 +9,12 @@ The app features a dynamic event list, interest tracking, theme switching, and s
 ![alt text](https://github.com/ccrash/EventExplorer/tree/main/assets/screen_2.jpeg?raw=true)
 ![alt text](https://github.com/ccrash/EventExplorer/tree/main/assets/screen_3.jpeg?raw=true)
 
+![Alt text](relative%20assets/screen_0.jpeg?raw=true "Title")
+![Alt text](relative%20/assets/screen_1.jpeg?raw=true "Title")
+![Alt text](relative%20./assets/screen_2.jpeg?raw=true "Title")
+
+
+![plot](./assets/screen_0.png)
 
 ## Installation
 
