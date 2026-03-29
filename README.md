@@ -69,3 +69,10 @@ This project was completed in approximately 10 hours, with a focus on adhering t
 ## Known Bugs
 
 - On Android, the header may not show the "Interested" icon. This may be related to [Expo SDK 53](https://github.com/expo/expo/issues/36793). Downgrade/Upgrade testing pending.
+
+## License
+
+This project is licensed under a custom non-commercial license.
+
+❗ Commercial use is prohibited  
+❗ Use in AI/ML systems is strictly prohibited without permission
